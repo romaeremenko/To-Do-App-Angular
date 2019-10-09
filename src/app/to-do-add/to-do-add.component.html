@@ -1,0 +1,11 @@
+<!--<input type="button" (click)="" id ="deleteAll" name="submit">-->
+<div id="toDoList">
+  <input type="button" id="deleteAll" name="submit" (click)="clearAll()">
+  <div id="interfaceInput">
+    <input id="input" [(ngModel)] = "todoTitle" type="text">
+    <input id="addToList" class="buttonStyle" type="submit" (click)="addToTasks(todoTitle)" value="Добавить">
+  </div>
+  <table *ngIf="todos.getLength()" id="list">
+    <app-to-do-view></app-to-do-view>
+  </table>
+</div>

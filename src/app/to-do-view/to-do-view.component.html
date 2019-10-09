@@ -1,0 +1,15 @@
+<div *ngFor="let todo of todos.toDoList">
+  <tr>
+    <input type="checkbox" data-task-status (click)="todos.changeStatus($event)">
+    <span data-task-done *ngIf="todo.status">✔</span>
+    <td [ngClass]="todo.status === true ? 'taskDone': 'taskNotDone'">{{todo.task}}</td>
+    <button *ngIf="!todo.status" data-task-editTaskName (click)="editTitle($event)"></button>
+    <button *ngIf="!todo.status" data-task-editTaskDescription (click)="editDescription($event)"></button>
+    <button (click)="todos.deleteTask($event)" data-task-clear></button>
+  </tr>
+  <div>
+    <app-to-do-description *ngIf="showDescription(todo.edited,todo.status)" [description]="todo.description" [title]="todo.task"></app-to-do-description>
+  </div>
+</div>
+<app-to-do-change-title *ngIf="onChangeTitle" [title]="title" (onConfirm)="onConfirm($event)" (onExit)="onExit($event)"></app-to-do-change-title>
+

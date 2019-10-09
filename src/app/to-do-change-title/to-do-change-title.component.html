@@ -1,0 +1,11 @@
+<div id="cover-div">
+  <div id="prompt-form-container">
+    <form id="prompt-form">
+      <div id="prompt-message">Введите новое название задачи</div>
+      <input name="text" type="text" [(ngModel)] = "title">
+      <input type="submit" class="buttonSubmitStyle" (click)="submitForm(title)" value="Ok">
+      <input type="button" class="buttonCancelStyle" (click)="exitForm(title)" name="cancel" value="Отмена">
+    </form>
+  </div>
+</div>
+
