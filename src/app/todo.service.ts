@@ -15,6 +15,11 @@ export class TodoService {
     return this.toDoList.map(obj => obj.task).indexOf(element);
   }
 
+  private setLocalStorage() {
+    console.log('true');
+    localStorage.setItem('list_of_tasks', JSON.stringify(this.toDoList));
+  }
+
   constructor() {
   }
 
@@ -28,7 +33,7 @@ export class TodoService {
       description: '',
       edited: false,
     });
-
+    this.setLocalStorage();
     console.log(this.toDoList);
   }
 
@@ -39,6 +44,7 @@ export class TodoService {
     }
     const task = this.getTitleFromNode($event);
     this.toDoList = this.toDoList.filter(todo => todo.task !== task);
+    this.setLocalStorage();
   }
 
   changeStatus($event): void {
@@ -47,6 +53,7 @@ export class TodoService {
       this.toDoList[this.getIndex(task)].edited = false;
     }
     this.toDoList[this.getIndex(task)].status = $event.target.checked;
+    this.setLocalStorage();
   }
 
   getLength(): boolean {
@@ -60,15 +67,18 @@ export class TodoService {
       this.toDoList[this.getIndex(oldTitle)].task = newTitle;
       console.log(this.toDoList);
     }
+    this.setLocalStorage();
   }
 
 
   changeEditStatus(task: string): void {
     this.toDoList[this.getIndex(task)].edited = !this.toDoList[this.getIndex(task)].edited;
+    this.setLocalStorage();
   }
 
   setDescription(title: string, description: string): void {
     this.toDoList[this.getIndex(title)].description = description;
+    this.setLocalStorage();
   }
 
   clear(): void {
@@ -78,5 +88,6 @@ export class TodoService {
         this.toDoList = [];
       }
     }
+    this.setLocalStorage();
   }
 }

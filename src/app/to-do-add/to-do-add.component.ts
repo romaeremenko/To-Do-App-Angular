@@ -10,10 +10,17 @@ import {TodoService} from '../todo.service';
 export class ToDoAddComponent implements OnInit {
   todoTitle: string;
   showTable: boolean;
+  listOfTasks: Todo[] = [];
 
   constructor(private todos: TodoService) {
     this.todoTitle = '';
     this.showTable = false;
+
+    this.listOfTasks = JSON.parse(localStorage.getItem('list_of_tasks'));
+
+    if (this.listOfTasks != null) {
+      this.todos.toDoList = this.listOfTasks;
+    }
   }
 
   ngOnInit() {
@@ -22,7 +29,7 @@ export class ToDoAddComponent implements OnInit {
 
   addToTasks(todoTitle: string = ''): void {
     if (todoTitle.trim()) {
-        this.todos.addTask(todoTitle);
+      this.todos.addTask(todoTitle);
     }
     this.showTable = true;
     this.todoTitle = '';
